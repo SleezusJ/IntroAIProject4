@@ -139,9 +139,28 @@ public class Car
 
 		//YOUR WORK HERE
 		//  You should copy over the car's balls_x and balls_y to newcar
-			//with probability "probability", change the balls_x and balls_y to a random number from 5 to 50
+		newcar.balls_x = this.balls_x;
+		newcar.balls_y = this.balls_y;
+		//with probability "probability", change the balls_x and balls_y to a random number from 5 to 50
+		for(int i=0; i<newcar.nodes; i++){
+			if (Math.random() < probability){
+				newcar.balls_x[i]=randint(5,50);
+				newcar.balls_y[i]=randint(5,50);
+			}
+		}
 		//  Then copy over the links
-		//	//with probability "probability", set the link to true/false (50/50 chance)
+		//	with probability "probability", set the link to true/false (50/50 chance)
+		for(int i=0;i<nodes;i++) {
+			for(int j=0;j<nodes;j++) {
+				if (Math.random() < probability){
+					if(newcar.linkmatrix[i][j]){
+						newcar.linkmatrix[i][j] = false;
+					}else{
+						newcar.linkmatrix[i][j] = true;
+					}
+				}
+			}
+		}
 
 		return newcar;
 	}

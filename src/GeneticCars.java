@@ -112,9 +112,17 @@ public class GeneticCars implements MouseListener
 	public void mutate()
 	{
 		//Make an arraylist of new cars
+		ArrayList<Car> newCars = new ArrayList<Car>();
 		// Go through every car in the population
-		//   with probability MUTATE_SELECTION_RATE, call the "mutate" method in class Car and add the child to the new car arraylist
+		for(Car car: population) {
+			//   with probability MUTATE_SELECTION_RATE, call the "mutate" method in class Car and add the child to the new car arraylist
+			if (Math.random() < MUTATE_SELECTION_RATE) {
+				Car childCar = car.mutate(MUTATE_RATE);
+				newCars.add(childCar);
+			}
+		}
 		//finally copy the cars in new car over to the population
+		population.addAll(newCars);
 	}
 
 	//TODO
@@ -122,10 +130,21 @@ public class GeneticCars implements MouseListener
 	public void kill()
 	{
 		//make a "keep" arraylist of cars
+		ArrayList<Car> keep = new ArrayList<Car>();
 		//Do this KILLTOPOPULATION times:
+		for(int i=0;i<KILLTOPOPULATION;i++){
 			// go through your population and find the best car.  Use the compare function (below).
+			int bestCarIndex = 0;
+			for(int j=1;j<population.size();j++){
+				//find best car in population
+				if(compare(population.get(bestCarIndex), population.get(j))){ bestCarIndex = j; }
+			}
 			// remove the best car from population and put it in the keep list
+			keep.add(population.get(bestCarIndex));
+			population.remove(bestCarIndex);
+		}
 		//set population=keep to make the keep list your population
+		population = keep;
 	}
 
 	//false if a is better, true if b is better
