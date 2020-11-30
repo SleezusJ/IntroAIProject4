@@ -36,7 +36,8 @@ public class GeneticCars implements MouseListener
 	public static final int KILLTOPOPULATION=10;
 
 	//the probability that any two cars will mate in a breed round
-	public static final double BREED_RATE=0.5;
+	//public static final double BREED_RATE=0.5;
+	public static final double BREED_RATE=0.8;
 
 	//the probability that any car will produce a baby mutant in a mutate round
 	public static final double MUTATE_SELECTION_RATE=0.5;
